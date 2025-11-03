@@ -2,6 +2,8 @@ pipeline {
     agent any
     environment {
         PYTHON='C:\\Users\\Dell\\AppData\\Local\\Programs\\Python\\Python314\\python.exe'
+        APP_TOKEN = credentials("APP_TOKEN")
+        
     }
     stages {
         stage('checkout code') {
@@ -18,6 +20,7 @@ pipeline {
         }
         stage('extract data') {
             steps {
+                 bat "SET TOKEN = ${env.APP_TOKEN} "
                  bat "${env.PYTHON} extract_data.py"
             }
 
